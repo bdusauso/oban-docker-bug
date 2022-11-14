@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  postgres: 
+    image: postgres:14
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+    ports:
+      - "5432:5432"
+
+  app:
+    # privileged: true
+    build:
+      context: .
+    depends_on: 
+      - postgres
+    volumes:
+      - '.:/app'
+
+volumes:
+  postgres_data:
+    driver: local
