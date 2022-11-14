@@ -1,21 +1,22 @@
-# ObanDocker
+# ObanDocker Bug ?
 
-**TODO: Add description**
+Trying to replicate a bug - or at least a very weird behaviour - explained [on ElixirForum](https://elixirforum.com/t/unusual-oban-behaviour-15-second-delays/51533)
+## Usage
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `oban_docker` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:oban_docker, "~> 0.1.0"}
-  ]
-end
+```
+docker compose build
+docker compose run app bash
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/oban_docker>.
+In the shell:
 
+```
+mix do deps.get, ecto.create, ecto.migrate
+iex -S mix
+```
+
+In IEx:
+
+```elixir
+ObanDocker.Tester.new(%{}) |> Oban.insert!()
+```
